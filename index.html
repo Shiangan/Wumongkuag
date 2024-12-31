@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>質感展示頁 - 分類區</title>
+    <title>質感展示頁 - 可下載</title>
     <style>
         /* 全局樣式 */
         body {
@@ -66,6 +66,11 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
+        .photo-item,
+        .video-item {
+            position: relative;
+            text-align: center;
+        }
         .photo-gallery img,
         .videos video {
             width: 100%;
@@ -77,6 +82,22 @@
         .videos video:hover {
             transform: scale(1.05);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+        .download-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .download-button:hover {
+            background: #333;
         }
         footer {
             text-align: center;
@@ -91,7 +112,7 @@
     <!-- 頁首 -->
     <header>
         <h1>質感展示頁</h1>
-        <p>選擇分類來瀏覽內容</p>
+        <p>點擊下載您喜愛的內容</p>
     </header>
 
     <!-- 分類按鈕 -->
@@ -103,30 +124,48 @@
     <!-- 照片內容 -->
     <div id="photos" class="content active">
         <div class="photo-gallery">
-            <img src="photo1.jpg" alt="照片 1">
-            <img src="photo2.jpg" alt="照片 2">
-            <img src="photo3.jpg" alt="照片 3">
-            <img src="photo4.jpg" alt="照片 4">
+            <div class="photo-item">
+                <img src="photo1.jpg" alt="照片 1">
+                <a href="photo1.jpg" download="photo1.jpg" class="download-button">下載</a>
+            </div>
+            <div class="photo-item">
+                <img src="photo2.jpg" alt="照片 2">
+                <a href="photo2.jpg" download="photo2.jpg" class="download-button">下載</a>
+            </div>
+            <div class="photo-item">
+                <img src="photo3.jpg" alt="照片 3">
+                <a href="photo3.jpg" download="photo3.jpg" class="download-button">下載</a>
+            </div>
+            <div class="photo-item">
+                <img src="photo4.jpg" alt="照片 4">
+                <a href="photo4.jpg" download="photo4.jpg" class="download-button">下載</a>
+            </div>
         </div>
     </div>
 
     <!-- 影片內容 -->
     <div id="videos" class="content">
         <div class="videos">
-            <video controls>
-                <source src="video1.mp4" type="video/mp4">
-                您的瀏覽器不支援影片播放。
-            </video>
-            <video controls>
-                <source src="video2.mp4" type="video/mp4">
-                您的瀏覽器不支援影片播放。
-            </video>
+            <div class="video-item">
+                <video controls>
+                    <source src="video1.mp4" type="video/mp4">
+                    您的瀏覽器不支援影片播放。
+                </video>
+                <a href="video1.mp4" download="video1.mp4" class="download-button">下載</a>
+            </div>
+            <div class="video-item">
+                <video controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    您的瀏覽器不支援影片播放。
+                </video>
+                <a href="video2.mp4" download="video2.mp4" class="download-button">下載</a>
+            </div>
         </div>
     </div>
 
     <!-- 頁腳 -->
     <footer>
-        <p>© 2025 祥安生命有限公司</p>
+        <p>© 2025 喬安的網頁設計 | 打造專屬質感</p>
     </footer>
 
     <script>
