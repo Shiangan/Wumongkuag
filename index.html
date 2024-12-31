@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>質感展示頁</title>
+    <title>質感展示頁 - 分類區</title>
     <style>
         /* 全局樣式 */
         body {
             font-family: "Microsoft JhengHei", Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #f5f5f5, #ddd);
+            background: linear-gradient(to bottom, #f8f8f8, #ddd);
             color: #333;
         }
         header {
@@ -26,37 +26,57 @@
             margin: 0;
             font-size: 2.5em;
         }
-        .container {
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .tabs button {
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1em;
+        }
+        .tabs button.active {
+            background: #555;
+        }
+        .tabs button:hover {
+            background: #333;
+        }
+        .content {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 20px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            display: none;
         }
-        .photo-gallery {
+        .content.active {
+            display: block;
+        }
+        .photo-gallery,
+        .videos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
-        .photo-gallery img {
+        .photo-gallery img,
+        .videos video {
             width: 100%;
             border-radius: 15px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .photo-gallery img:hover {
-            transform: scale(1.1);
+        .photo-gallery img:hover,
+        .videos video:hover {
+            transform: scale(1.05);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-        }
-        .videos {
-            margin-top: 50px;
-        }
-        .videos video {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
         }
         footer {
             text-align: center;
@@ -65,49 +85,33 @@
             color: #fff;
             font-size: 0.9em;
         }
-        /* 背景音樂樣式 */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 20px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        .music-player button {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        .music-player button:hover {
-            color: #ffcc00;
-        }
     </style>
 </head>
 <body>
     <!-- 頁首 -->
     <header>
-        <h1>吳萌光先生</h1>
-        <p>追思圓滿紀錄</p>
+        <h1>質感展示頁</h1>
+        <p>選擇分類來瀏覽內容</p>
     </header>
 
-    <!-- 主要內容 -->
-    <div class="container">
-        <!-- 照片區 -->
-        <div class="photo-gallery">
-            <img src="image/photo1.jpg" alt="照片 1">
-            <img src="image/photo2.jpg" alt="照片 2">
-            <img src="image/photo3.jpg" alt="照片 3">
-            <img src="image/photo4.jpg" alt="照片 4">
-        </div>
+    <!-- 分類按鈕 -->
+    <div class="tabs">
+        <button class="tab-button active" data-tab="photos">照片區</button>
+        <button class="tab-button" data-tab="videos">影片區</button>
+    </div>
 
-        <!-- 影片區 -->
+    <!-- 照片內容 -->
+    <div id="photos" class="content active">
+        <div class="photo-gallery">
+            <img src="photo1.jpg" alt="照片 1">
+            <img src="photo2.jpg" alt="照片 2">
+            <img src="photo3.jpg" alt="照片 3">
+            <img src="photo4.jpg" alt="照片 4">
+        </div>
+    </div>
+
+    <!-- 影片內容 -->
+    <div id="videos" class="content">
         <div class="videos">
             <video controls>
                 <source src="video1.mp4" type="video/mp4">
@@ -120,33 +124,27 @@
         </div>
     </div>
 
-    <!-- 背景音樂播放器 -->
-    <div class="music-player">
-        <span>背景音樂：</span>
-        <audio id="background-music" src="music.mp3" loop></audio>
-        <button onclick="toggleMusic()">播放</button>
-    </div>
-
     <!-- 頁腳 -->
     <footer>
-        <p>© 2025 喬安的網頁設計 | 打造專屬質感</p>
+        <p>© 2025 祥安生命有限公司</p>
     </footer>
 
     <script>
-        const music = document.getElementById('background-music');
-        const button = document.querySelector('.music-player button');
-        let isPlaying = false;
+        // 分類切換功能
+        const tabs = document.querySelectorAll('.tab-button');
+        const contents = document.querySelectorAll('.content');
 
-        function toggleMusic() {
-            if (isPlaying) {
-                music.pause();
-                button.textContent = '播放';
-            } else {
-                music.play();
-                button.textContent = '暫停';
-            }
-            isPlaying = !isPlaying;
-        }
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 移除所有按鈕與內容的 "active" 狀態
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // 添加 "active" 狀態到被點擊的按鈕與對應內容
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
